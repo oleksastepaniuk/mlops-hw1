@@ -1,8 +1,7 @@
 import uuid
 
-from application.question.model.dto.question import Question
-from application.question.model.mapper.question_mapper import QuestionMapper
-from application.models import Page
+from question.model.dto.question import Question
+from question.model.mapper.question_mapper import QuestionMapper
 
 class QuestionFilters:
     def __init__(self, author_id):
@@ -27,6 +26,7 @@ class QuestionsService:
         #витягли з бази і замаппали в дто
         return Question(id=question_id, author_id=1, body='body')
     
-    def get_questions(self, filters: QuestionFilters, page: int, size: int) -> Page[Question]:
+    def get_questions(self, filters: QuestionFilters) -> [Question]:
         questions = [self.get_question(uuid.uuid4())]
-        return Page(size=size, page=page, total_pages=1, content=questions)
+        return questions
+    

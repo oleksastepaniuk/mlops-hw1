@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package question;
+
+// The Question message represents a question object.
+message Question {
+  string id = 1;
+  string author_id = 2;
+  string body = 3;
+  int32 upvotes = 4;
+}
+
+// The QuestionFilters message represents filters for getting questions.
+message QuestionFilters {
+  string author_id = 1;
+}
+
+message QuestionRequest {
+  string question_id = 1;
+}
+
+// The QuestionController service defines the API for operations related to Question objects.
+service QuestionController {
+  // Create a new question.
+  rpc CreateOrUpdateQuestion(Question) returns (Question) {}
+
+  // Get a list of questions.
+  rpc GetQuestions(QuestionFilters) returns (stream Question) {}
+
+  // Get a specific question by its ID.
+  rpc GetQuestion(QuestionRequest) returns (Question) {}
+
+  rpc UpvoteQuestion(QuestionRequest) returns (Question) {}
+}
