@@ -18,6 +18,12 @@ services:
     image: "mlops-course/hw1-questions:0.0.1"
     ports:
       - 5000:5000
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: mlops-hw1_postgres_1
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: questionsdb
     depends_on:
       - postgres
     networks:
