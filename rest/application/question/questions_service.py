@@ -1,8 +1,8 @@
 import uuid
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine.result import Result
-from config import Config
 
+from config import Config
 from application.question.model.dto.question import Question
 from application.question.model.mapper.question_mapper import QuestionMapper
 from application.models import Page
@@ -58,6 +58,7 @@ class QuestionsService:
     
     def update_question(self, question_id, request_data) -> Question:
         question = self.questions_mapper.map_request(request_data)
+        question.id = question_id
         self._update_question_db(question)
         return question
     
