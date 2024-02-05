@@ -5,14 +5,14 @@ class AnswerMapper:
 
     def map_request(self, request_data):
         #Should be immutable
-        question = Answer(id = request_data.get('id') or uuid.uuid4(), 
+        answer = Answer(id = request_data.get('id') or uuid.uuid4(), 
                             author_id=request_data.get('author_id'), 
                             question_id=request_data.get('question_id'),
                             body=request_data.get('body'),
                             score=request_data.get('score')
                          )
         
-        return question
+        return answer
     
     
     def map_entity_to_dto(self, entity):

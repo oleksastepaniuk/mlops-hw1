@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16.1-bookworm
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    restart: on-failure:5
+    env_file:
+      - .env
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - datanet
+
+  questions_app:
+    image: "mlops-course/hw1-questions:0.0.1"
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - datanet
+
+
+networks:
+  datanet:
+   driver: bridge
